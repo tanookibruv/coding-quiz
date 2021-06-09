@@ -1,18 +1,29 @@
-timeEl = document.querySelector(".time");
-startEl = document.querySelector("#start");
+var timeEl = document.querySelector(".time");
+var startEl = document.querySelector("#start");
+
+var timer;
+var timerCount;
+
 
 function initGame() {
-    var initGame = 
+    
 }
 
-function setTime() {
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timerInterval.textContent = secondsLeft + " seconds left.";
+function startTimer() {
+    timer = setInterval(function() {
+        timerCount--;
+        timerElement.textContent = timerCount;
 
-        if(seconds === 0) {
-            clearInterval(timerInterval);
-            sendMessage()
+        if(timerCount >=0) {
+            if(correct && timerCount > 0) {
+                resetInterval(timer);
+                nextQuestion
+            }
+        }
+
+        if (timerCount === 0) {
+            resetInterval(timer);
+            nextQuestion()
         }
 
     }, 2000);
