@@ -12,32 +12,38 @@
 </head>
 
 <body>
-    <header class="score">Highscore: </header>
-    <main>
-        <header>
-            <div class="opening fs-1 fw-bolder">Coding Quiz!</div>
-        </header>
+    <div class="score">Highscore: </div>
 
-        <section class="heading">
-            <div class="intro fs-4">
-                <p>Here we will test how familiar you are with JavaScript fundamentals. You'll be able to view your
-                    highscore and compare it with your friends. Press the "Start" button to begin!</p>
-            </div>
-            <button type="button" class="start-quiz btn-primary btn btn-large">Start!</button>
-        </section>
+    <div class="timer">Time: <span id="time">0</span></div>
 
-        <section id="q-and-a" class="hide">
-            <div class="questions fs-1 fw-bolder">Here Is the Filler for the First Question to be replaced once the start button is pressed.</div>
-            <div class="btn-group-vertical">
-                <button class="btn-warning d-flex my-2">filler answer</button>
-                <button class="btn-warning d-flex my-2">filler answer</button>
-                <button class="btn-warning d-flex my-2">filler answer</button>
-                <button class="btn-warning d-flex my-2">filler answer</button>
-            </ul>
-        </section>
+    <div class="main">
+        <h1 class="opening fs-1 fw-bolder">Coding Quiz!</h1>
+        <p>
+            Here we will test how familiar you are with JavaScript fundamentals. You'll be able to view your
+                highscore and compare it with your friends. Press the "Start" button to begin!
+        </p>
+        <button type="button" class="start-quiz btn-primary btn btn-large">Start!</button>
 
-        
-    </main>
+        <div class="hide">
+            <h1 id="q-and-a" class="questions fs-1 fw-bolder">
+                Commonly used data types DO NOT include:
+            </h1>
+            <h2 id="q-and-a" class="btn-group-vertical">
+                <button class="btn-warning d-flex my-2">Strings</button>
+                <button class="btn-warning d-flex my-2">Booleans</button>
+                <button class="btn-warning d-flex my-2">Alerts</button>
+                <button class="btn-warning d-flex my-2">Numbers</button>
+            </h2>
+        </div>
+
+        <div class="leaderboard hide">
+            <h1>Highscores</h1>
+            <ol id="highscores"></ol>
+
+            <button type="button" class="start-quiz btn-primary btn btn-large">Start Again!</button>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 
