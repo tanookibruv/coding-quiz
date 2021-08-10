@@ -1,9 +1,10 @@
 var timeEl = document.querySelector("#time");
 var startEl = document.querySelector(".start-quiz");
 var mainPage = document.querySelector(".main")
-
-var timer;
-var timerCount;
+var openingPage = document.querySelector(".opening")
+var questionsEl = document.querySelector("#q-and-a")
+var timerEl =  document.querySelector("#time")
+var timerCount = 15;
 
 var questions = [
     {
@@ -42,29 +43,31 @@ var questions = [
 
 
 function initGame() {
-    
+    var openingPage = document.querySelector(".opening");
+    openingPage.setAttribute("class", "hide");
+
+    questionsEl.removeAttribute("class");
+
+    startTimer();
 }
 
 function startTimer() {
     timer = setInterval(function() {
         timerCount--;
-        timerElement.textContent = timerCount;
+        timerEl.textContent = timerCount;
 
         if(timerCount >=0) {
-            if(correct && timerCount > 0) {
+            if(correct > 0) {
                 resetInterval(timer);
-                nextQuestion
+                nextQuestion()
             }
         }
 
-        if (timerCount === 0) {
-            resetInterval(timer);
-            nextQuestion()
+        if (timerCount <= 0) {
+            quizEnd();
         }
 
-    }, 2000);
+    }, 1000);
 }
 
-startEl.addEventLisntener("click", function() {
-    initGame()
-});
+startEl.onclick = initGame;
