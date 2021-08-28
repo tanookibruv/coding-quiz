@@ -43,11 +43,12 @@ var questions = [
 ];
 
 function initGame() {
+  console.log('hello')
     var openingPage = document.querySelector(".opening");
     
     openingPage.setAttribute("class", "hide");
 
-    questionsEl.removeAttribute("class");
+    questionsEl.classList.remove('hide');
 
     startTimer();
 }
@@ -71,7 +72,7 @@ function quizEnd() {
   var leaderEL = document.querySelector("#leaderboard")
   questionsEl.setAttribute("class", "hide");
 
-  leaderEL.removeAttribute("class");
+  leaderEL.classList.remove('hide');
 }
 
-startEl.onclick = initGame;
+startEl.addEventListener('click', initGame);
