@@ -6,6 +6,8 @@ var leaderEL = document.querySelector("#leaderboard");
 var questionsEl = document.querySelector("#q-and-a");
 var timerEl = document.querySelector("#time");
 var timerCount = 15;
+var userName = document.querySelector("#userName")
+var submitEl = document.querySelector("#submit")
 
 var questions = [
   {
@@ -81,14 +83,17 @@ function quizEnd() {
 startEl.addEventListener('click', initGame);
 
 
-//--The following code is the functions to save the users name along with their highscore--//
-var UName = document.querySelector("#userName")
-var submitEl = document.querySelector("#submit")
+//The following code is the functions to save the users name along with their highscore.
+submitEl.addEventListener("click", function(event) {
+  event.preventDefault();
 
-function saveUNS() {
-  var userInput {
-    username: UName.value,
-    score: score.value,
+  var userInput = {
+    nameInput: userName.value,
+    // score: score.value
   }
+  
   localStorage.setItem("userInput", JSON.stringify(userInput));
-}
+
+
+})
+
