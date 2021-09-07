@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="score">Highscore: </div>
+    <div id="recent-score" class="score">Highscore: </div>
 
     <div class="timer">Time: <span id="time">0</span></div>
 
@@ -23,21 +23,21 @@
                 Here we will test how familiar you are with JavaScript fundamentals. You'll be able to view your
                     highscore and compare it with your friends. Press the "Start" button to begin!
             </p>
-            <button type="button" class="start-quiz btn-primary btn btn-large">Start!</button>
+            <button id="start-quiz" class="btn-primary btn btn-large">Start!</button>
         </div>
 
         <div id="q-and-a" class="hide">
-            <h1 class="questions">yo</h1>
+            <h1 id="questions">yo</h1>
             <h2 id="choices">yo</h2>
         </div>
 
         <div id="leaderboard" class="hide">
-            <h1>Highscores</h1>
-            <ol id="highscores"></ol>
-            <label for="userName">Enter Name: </label>
-            <input type="text" id="userName" name="userName"><br><br>
-            <input type="submit" id="submit" value="Submit" class="btn-secondary btn btn-large">
-            <a href="main.html"><button" class="btn-primary btn btn-large">Home</button></a>
+            <h2>You have completed the quiz!!</h2>
+            <p>Here's your score! - <span id="score"></span></p>
+            <p>
+            Enter your name: <input type="text" id="userName">
+            <button id="submit" class="btn-secondary btn btn-large">Submit</button>
+            </p>
         </div>
     </div>
 

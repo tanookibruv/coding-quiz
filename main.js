@@ -1,13 +1,17 @@
-var timeEl = document.querySelector("#time");
-var startEl = document.querySelector(".start-quiz");
+var startEl = document.querySelector("#start-quiz");
 var mainPage = document.querySelector(".main");
 var openingPage = document.querySelector(".opening");
 var leaderEL = document.querySelector("#leaderboard");
-var questionsEl = document.querySelector("#q-and-a");
+var questionsEl = document.querySelector("#questions");
+var choicesEl = document.querySelector("#choices")
+var currentQuestionIndex = 0
 var timerEl = document.querySelector("#time");
 var timerCount = 15;
-var UName = document.querySelector("#userName")
-var submitEl = document.querySelector("#submit")
+var timerId;
+var inputEl = document.querySelector("#userName");
+var submitEl = document.querySelector("#submit");
+
+var userInput = [];
 
 var questions = [
   {
@@ -55,39 +59,99 @@ function initGame() {
 
   questionsEl.classList.remove('hide');
 
+  timerId = setInterval(startTimer, 1000)
+
+  timerEl.textContent = timerCount;
+
   startTimer();
 }
 
-function startTimer() {
-  var timerInterval = setInterval(function () {
-    timerCount--;
-    timerEl.textContent = timerCount;
+function getQuestions() {
+  var currentQuestion = questions[currentQuestionIndex];
 
-    if (timerCount === 0) {
-      clearInterval(timerInterval);
+  var mainQuest = document.getElementById("questions");
+  mainQuest.textContent = currentQuestion.title;
 
-      quizEnd();
+  choicesEl.innerHTML = "";
+
+  currentQuestion.choices.forEach(function (choice, i) {
+    var choiceNode = document.createElement("button");
+    choiceNode.setAttribute("class", "choice");
+    choiceNode.setAttribute("value", choice);
+
+    choiceNode.textContent = i + 1 + ", " + choice;
+
+    choiceNode.addEventListener("click", questionClick);
+
+    choicesEl.appendChild(choiceNode);
+  });
+}
+
+function questionClick() {
+  if (this.value !== questions[currentQuestionIndex].answer) {
+    time -= 15;
+
+    if (time < 0) {
+      time = 0
     }
 
-  }, 1000);
+    timerEl.textContent = time;
+  }
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex === questions.length) {
+    quizEnd()
+  } else {
+    getQuestions()
+  }
+}
+
+function startTimer() {
+  timerCount--;
+  timerEl.textContent = timerCount;
+
+  if (timerCount <= 0) {
+
+    quizEnd();
+  }
+
 }
 
 function quizEnd() {
-  timerEl.textContent = " ";
+  clearInterval(timerId)
   var leaderEL = document.querySelector("#leaderboard")
+
+  var scoreEl = document.querySelector("#score");
+  scoreEl.textContent = timerCount;
+
   questionsEl.setAttribute("class", "hide");
 
   leaderEL.classList.remove('hide');
 }
 
+//The following code is the functions to save the users name along with their highscore.
+function saveHighscore() {
+  var input = inputEl.value.trim();
+  console.log("input")
+
+  if (input !== "") {
+    var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+    var newScore = {
+      score: timerCount,
+      input: input
+    };
+
+    highscores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    window.location.href = "highscore.html";
+    console.log("highscores")
+  }
+}
+
+//--button elements--//
 startEl.addEventListener('click', initGame);
 
-
-//The following code is the functions to save the users name along with their highscore.
-function saveUNS() {
-  var userInput {
-    username: UName.value,
-    score:
-  };
-  localStorage.setItem("userInput", JSON.stringify(userInput));
-}
+submitEl.addEventListener('click', saveHighscore);
