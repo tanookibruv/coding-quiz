@@ -133,7 +133,6 @@ function quizEnd() {
 //The following code is the functions to save the users name along with their highscore.
 function saveHighscore() {
   var input = inputEl.value.trim();
-  console.log("input")
 
   if (input !== "") {
     var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
@@ -147,7 +146,7 @@ function saveHighscore() {
     window.localStorage.setItem("highscores", JSON.stringify(highscores));
 
     window.location.href = "highscore.html";
-    console.log("highscores")
+    console.log(newScore)
   }
 }
 
