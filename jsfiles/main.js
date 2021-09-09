@@ -1,17 +1,16 @@
 var startEl = document.querySelector("#start-quiz");
-var mainPage = document.querySelector(".main");
 var openingPage = document.querySelector(".opening");
 var leaderEL = document.querySelector("#leaderboard");
-var questionsEl = document.querySelector("#questions");
-var choicesEl = document.querySelector("#choices")
+var questDiv = document.querySelector("#q-and-a");
+var choicesEl = document.querySelector("#choices-text")
 var currentQuestionIndex = 0
+var feedbackEl = document.getElementById("feedback");
 var timerEl = document.querySelector("#time");
 var timerCount = 15;
 var timerId;
 var inputEl = document.querySelector("#userName");
 var submitEl = document.querySelector("#submit");
 
-var userInput = [];
 
 var questions = [
   {
@@ -57,55 +56,34 @@ function initGame() {
 
   openingPage.setAttribute("class", "hide");
 
-  questionsEl.classList.remove('hide');
+  questDiv.classList.remove('hide');
 
   timerId = setInterval(startTimer, 1000)
 
   timerEl.textContent = timerCount;
 
   startTimer();
+  getQuestion();
 }
 
-function getQuestions() {
-  var currentQuestion = questions[currentQuestionIndex];
-
-  var mainQuest = document.getElementById("questions");
-  mainQuest.textContent = currentQuestion.title;
+function getQuestion() {
+  var randomQuestion = questions[currentQuestionIndex];
+  var questionsEL = document.querySelector("#question-main")
+  questionsEL.textContent = randomQuestion.title;
 
   choicesEl.innerHTML = "";
 
-  currentQuestion.choices.forEach(function (choice, i) {
+  randomQuestion.choices.forEach(function(choice, i) {
     var choiceNode = document.createElement("button");
     choiceNode.setAttribute("class", "choice");
     choiceNode.setAttribute("value", choice);
 
     choiceNode.textContent = i + 1 + ", " + choice;
 
-    choiceNode.addEventListener("click", questionClick);
-
-    choicesEl.appendChild(choiceNode);
-  });
+    choicesEl.appendChild(choiceNode)
+  })
 }
 
-function questionClick() {
-  if (this.value !== questions[currentQuestionIndex].answer) {
-    time -= 15;
-
-    if (time < 0) {
-      time = 0
-    }
-
-    timerEl.textContent = time;
-  }
-
-  currentQuestionIndex++;
-
-  if (currentQuestionIndex === questions.length) {
-    quizEnd()
-  } else {
-    getQuestions()
-  }
-}
 
 function startTimer() {
   timerCount--;
@@ -125,7 +103,7 @@ function quizEnd() {
   var scoreEl = document.querySelector("#score");
   scoreEl.textContent = timerCount;
 
-  questionsEl.setAttribute("class", "hide");
+  questDiv.setAttribute("class", "hide");
 
   leaderEL.classList.remove('hide');
 }
