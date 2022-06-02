@@ -7,7 +7,7 @@ function printHS () {
 
     highscores.forEach(function(score) {
         var liTag = document.createElement("li");
-        liTag.textContent = score.initials + " - " + score.score;
+        liTag.textContent = score.input + " - " + score.score;
 
         var olEl = document.getElementById("highscores");
         olEl.appendChild(liTag);

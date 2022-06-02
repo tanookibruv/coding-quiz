@@ -80,8 +80,37 @@ function getQuestion() {
 
     choiceNode.textContent = i + 1 + ", " + choice;
 
+    choiceNode.onClick = clickQuestion;
+
     choicesEl.appendChild(choiceNode)
   })
+}
+
+function clickQuestion() {
+  if (this.value !== questions[currentQuestionIndex].answer) {
+    time -= 5;
+
+    if (time < 0) {
+      time = 0
+    }
+
+    timerEl.textContent = timerCount;
+
+    feedbackEl.textContent = "Nope!";
+
+  } else {
+    feedbackEl.textContent = "That's it!"
+  }
+
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    getQuestion()
+  }
+  console.log('im being clicked')
 }
 
 
