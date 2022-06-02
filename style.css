@@ -38,6 +38,9 @@ body {
     display: none;
 }
 
+.choices button {
+    display: block;
+  }
 
 #q-and-a {
     flex-direction: column;
