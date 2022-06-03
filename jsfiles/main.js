@@ -2,7 +2,7 @@ var startEl = document.querySelector("#start-quiz");
 var openingPage = document.querySelector(".opening");
 var leaderEL = document.querySelector("#leaderboard");
 var questDiv = document.querySelector("#q-and-a");
-var choicesEl = document.querySelector("#choices-text")
+var choicesEl = document.querySelector("#choices")
 var currentQuestionIndex = 0
 var feedbackEl = document.getElementById("feedback");
 var timerEl = document.querySelector("#time");
@@ -75,12 +75,12 @@ function getQuestion() {
 
   randomQuestion.choices.forEach(function(choice, i) {
     var choiceNode = document.createElement("button");
-    choiceNode.setAttribute("class", "choice");
+    choiceNode.setAttribute("class", "choices");
     choiceNode.setAttribute("value", choice);
 
     choiceNode.textContent = i + 1 + ", " + choice;
 
-    choiceNode.onClick = clickQuestion;
+    choiceNode.onclick = clickQuestion;
 
     choicesEl.appendChild(choiceNode)
   })
@@ -95,11 +95,11 @@ function clickQuestion() {
     }
 
     timerEl.textContent = timerCount;
-
-    feedbackEl.textContent = "Nope!";
+    console.log('wrong')
 
   } else {
-    feedbackEl.textContent = "That's it!"
+    time + 10;
+    console.log('right')
   }
 
 
